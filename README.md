@@ -1,14 +1,79 @@
-## Logistic Regression Model both in Python and R
+# Logistic Regression — Social Network Ads
 
-# I used logistic Regression to classify the Social_Media_Ads dataset , and produce two Graphs of training set and test set each so We can do the Analysis properly.
+Binary classification using Logistic Regression to predict whether a user purchases a product based on age and estimated salary.
 
-Binary Logistic Regression is a special type of regression where binary response variable is related to a set of explanatory variables, which can be discrete and/or continuous. The important point here to note is that in linear regression, the expected values of the response variable are modeled based on combination of values taken by the predictors. In logistic regression Probability or Odds of the response taking a particular value is modeled based on combination of values taken by the predictors.
+## What It Does
 
-### Logistic regression is applicable, if:
+Trains a Logistic Regression model on the **Social Network Ads** dataset and visualises the decision boundary for both training and test sets. The workflow:
 
-- we want to model the probabilities of a response variable as a function of some explanatory variables, e.g. "success" of admission as a function of gender.
-- we want to perform descriptive discriminate analyses such as describing the differences between individuals in separate groups as a function of explanatory variables, e.g. student admitted and rejected as a function of gender
-- we want to predict probabilities that individuals fall into two categories of the binary response as a function of some explanatory variables, e.g. what is the probability that a student is admitted given she is a female
-- we want to classify individuals into two categories based on explanatory variables, e.g. classify new students into "admitted" or "rejected" group depending on their gender.
+1. Loads the dataset (400 users with age, salary, and purchase label)
+2. Splits into 75 / 25 train-test
+3. Applies standard scaling
+4. Fits a Logistic Regression classifier
+5. Outputs a confusion matrix and two decision-boundary plots
 
-# Remember in Scikit learn Model , from 0.18 version test_train_split Class is not imported from Cross_Validation instead through model_selection in Python
+Implementations are provided in both **Python** and **R**.
+
+## Dataset
+
+| Column           | Description                        |
+|------------------|------------------------------------|
+| User ID          | Unique identifier (not used)       |
+| Gender           | Male / Female (not used)           |
+| Age              | User age                           |
+| EstimatedSalary  | Annual estimated salary            |
+| Purchased        | 0 = No, 1 = Yes (target)          |
+
+Source: `Social_Network_Ads.csv` (included in repo).
+
+## 🛠 Tech Stack
+
+| Tool | Purpose |
+|------|---------|
+| 🐍 Python 3.10+ | Primary language |
+| 📊 scikit-learn | Logistic Regression, train/test split, metrics |
+| 🔢 NumPy | Numerical operations |
+| 🐼 pandas | Data loading |
+| 📈 matplotlib | Decision-boundary visualisation |
+| 📊 R | Alternative implementation |
+
+## Getting Started
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run
+python logistic_regression.py
+```
+
+For the R version:
+
+```r
+source("logistic_regression.R")
+```
+
+> The R script requires the `caTools` and `ElemStatLearn` packages.
+
+## Fixes Applied
+
+The original code was written for scikit-learn < 0.18. The following modernisations were made:
+
+- `sklearn.cross_validation` → `sklearn.model_selection` (removed in sklearn 0.20)
+- All imports moved to top of file (PEP 8)
+- Removed duplicate `ListedColormap` import
+- Fixed `ListedColormap()(i)` scatter color — now uses plain color strings
+- Added explicit `solver='lbfgs'` and `max_iter=200` to `LogisticRegression`
+- Added `if __name__ == "__main__"` guard
+- CSV path is now relative to script location via `os.path`
+- Extracted plot logic into a reusable `_plot_decision_boundary()` function
+- Added `requirements.txt`
+
+## ⚠️ Known Issues
+
+- The R script depends on `ElemStatLearn`, which has been archived on CRAN. Install from archive or use an alternative visualisation approach.
+- Decision-boundary plots use a fine mesh (`step=0.01`) which can be slow on large feature ranges.
+
+## License
+
+MIT
