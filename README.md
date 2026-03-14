@@ -1,14 +1,86 @@
-## Logistic Regression Model both in Python and R
+# 📊 Logistic Regression — Social Network Ads Classifier
 
-# I used logistic Regression to classify the Social_Media_Ads dataset , and produce two Graphs of training set and test set each so We can do the Analysis properly.
+A binary classification project using **Logistic Regression** to predict whether a user will purchase a product based on their age and estimated salary. Implemented in both Python (scikit-learn) and R.
 
-Binary Logistic Regression is a special type of regression where binary response variable is related to a set of explanatory variables, which can be discrete and/or continuous. The important point here to note is that in linear regression, the expected values of the response variable are modeled based on combination of values taken by the predictors. In logistic regression Probability or Odds of the response taking a particular value is modeled based on combination of values taken by the predictors.
+## 🧠 Methodology
 
-### Logistic regression is applicable, if:
+1. **Data Loading** — Read the `Social_Network_Ads.csv` dataset containing user demographics and purchase history.
+2. **Feature Selection** — Use `Age` and `EstimatedSalary` as predictor variables; `Purchased` (0/1) as the target.
+3. **Train/Test Split** — 75% training, 25% testing (`random_state=0` for reproducibility).
+4. **Feature Scaling** — Standardize features using `StandardScaler` so both dimensions contribute equally.
+5. **Model Training** — Fit a Logistic Regression classifier on the scaled training data.
+6. **Evaluation** — Generate a confusion matrix, accuracy score, and full classification report.
+7. **Visualization** — Plot decision boundaries for both training and test sets.
 
-- we want to model the probabilities of a response variable as a function of some explanatory variables, e.g. "success" of admission as a function of gender.
-- we want to perform descriptive discriminate analyses such as describing the differences between individuals in separate groups as a function of explanatory variables, e.g. student admitted and rejected as a function of gender
-- we want to predict probabilities that individuals fall into two categories of the binary response as a function of some explanatory variables, e.g. what is the probability that a student is admitted given she is a female
-- we want to classify individuals into two categories based on explanatory variables, e.g. classify new students into "admitted" or "rejected" group depending on their gender.
+## 🛠️ Tech Stack
 
-# Remember in Scikit learn Model , from 0.18 version test_train_split Class is not imported from Cross_Validation instead through model_selection in Python
+| Tool | Purpose |
+|------|---------|
+| 🐍 Python 3 | Primary implementation |
+| 📊 R | Alternative implementation |
+| 🤖 scikit-learn | ML model, preprocessing, evaluation |
+| 🔢 NumPy | Numerical operations |
+| 🐼 pandas | Data loading and manipulation |
+| 📈 matplotlib | Decision boundary visualization |
+
+## 📦 Dependencies
+
+### Python
+
+```
+numpy
+pandas
+matplotlib
+scikit-learn
+```
+
+Install with:
+
+```bash
+pip install numpy pandas matplotlib scikit-learn
+```
+
+### R
+
+```
+caTools
+ElemStatLearn
+```
+
+## 🚀 How to Run
+
+### Python
+
+```bash
+cd Logistic-Regression
+python logistic_regression.py
+```
+
+The script will print the confusion matrix, accuracy, and classification report to the console, then display the training and test set decision boundary plots.
+
+### R
+
+```bash
+Rscript logistic_regression.R
+```
+
+## 📁 Project Structure
+
+```
+.
+├── logistic_regression.py    # Python implementation
+├── logistic_regression.R     # R implementation
+├── Social_Network_Ads.csv    # Dataset
+├── LICENSE                   # MIT License
+└── README.md
+```
+
+## ⚠️ Known Issues
+
+- The R script depends on `ElemStatLearn`, which has been archived from CRAN. You may need to install it from an archive mirror or use an alternative visualization approach.
+- The visualization step generates a dense meshgrid and can be slow on large datasets.
+- The dataset path is relative — run the script from the project root directory.
+
+## 📄 License
+
+MIT — see [LICENSE](LICENSE) for details.
